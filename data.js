@@ -346,9 +346,9 @@ const WORKOUT_SPLIT = {
           step3: { title: "Step 3: Seated Pallof Transition", desc: "Sit tall on bench next to cable pulley. Press D-handle straight out from chest and hold resisting rotation." }
         },
         phaseData: {
-          m1: { sets: 3, reps: "10 dead bugs/side + 12 pallof presses", weightKg: "Bodyweight / 7.5 kg cable", tempo: "Slow 2s hold", restSec: 60 },
-          m2: { sets: 3, reps: "12 dead bugs/side + 12 pallof presses", weightKg: "Bodyweight / 10 kg cable", tempo: "Slow 3s hold", restSec: 60 },
-          m3: { sets: 3, reps: "12 dead bugs/side + 15 pallof presses", weightKg: "Bodyweight / 12.5 kg cable", tempo: "Slow 3s hold", restSec: 60 }
+          m1: { sets: 3, reps: "10 dead bugs/side + 12 pallof presses", weightKg: "Dead Bugs: 0 kg (Bodyweight) | Pallof: 5–7.5 kg (Light Cable)", tempo: "Slow 2s hold", restSec: 60 },
+          m2: { sets: 3, reps: "12 dead bugs/side + 12 pallof presses", weightKg: "Dead Bugs: 0 kg (Bodyweight) | Pallof: 7.5–10 kg (Cable)", tempo: "Slow 3s hold", restSec: 60 },
+          m3: { sets: 3, reps: "12 dead bugs/side + 15 pallof presses", weightKg: "Dead Bugs: 0 kg (Bodyweight) | Pallof: 10–12.5 kg (Cable)", tempo: "Slow 3s hold", restSec: 60 }
         },
         cues: {
           setup: "Dead bug: Lie on gym mat, knees at 90°, arms pointing to ceiling. Pallof: Sit tall on bench perpendicular to cable machine.",
@@ -973,9 +973,9 @@ const WORKOUT_SPLIT = {
           step3: { title: "Step 3: 2s Outward Press", desc: "Exhale sharply, press handle straight forward. Fight the rotation for 2 seconds. Return to chest." }
         },
         phaseData: {
-          m1: { sets: 3, reps: "10 dead bugs + 12 pallof presses", weightKg: "Bodyweight / 7.5 kg", tempo: "3s eccentric", restSec: 60 },
-          m2: { sets: 3, reps: "12 dead bugs + 12 pallof presses", weightKg: "Bodyweight / 10 kg", tempo: "3s eccentric", restSec: 60 },
-          m3: { sets: 3, reps: "12 dead bugs + 15 pallof presses", weightKg: "Bodyweight / 12.5 kg", tempo: "3s eccentric", restSec: 60 }
+          m1: { sets: 3, reps: "10 dead bugs + 12 pallof presses", weightKg: "Dead Bugs: 0 kg (Bodyweight) | Pallof: 5–7.5 kg (Light Cable)", tempo: "3s eccentric", restSec: 60 },
+          m2: { sets: 3, reps: "12 dead bugs + 12 pallof presses", weightKg: "Dead Bugs: 0 kg (Bodyweight) | Pallof: 7.5–10 kg (Cable)", tempo: "3s eccentric", restSec: 60 },
+          m3: { sets: 3, reps: "12 dead bugs + 15 pallof presses", weightKg: "Dead Bugs: 0 kg (Bodyweight) | Pallof: 10–12.5 kg (Cable)", tempo: "3s eccentric", restSec: 60 }
         },
         cues: {
           setup: "Perform deliberate slow dead bugs on mat, then transition directly to standing/seated cable Pallof press.",
