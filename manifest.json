@@ -1,0 +1,18 @@
+{
+  "name": "AnkleGuard Coach",
+  "short_name": "AnkleCoach",
+  "description": "3-Month Ankle-Safe Gym Coach & Indian Transformation App",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#090d16",
+  "theme_color": "#090d16",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

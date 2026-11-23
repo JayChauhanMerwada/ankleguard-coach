@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#090d16">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>AnkleGuard Coach | 3-Month Transformation</title>
+  
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+  <link rel="apple-touch-icon" href="assets/icon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Floating Sticky Rest Timer Dock -->
+  <div class="floating-timer-dock hidden" id="floating-timer">
+    <div class="timer-dock-info">
+      <div class="timer-dock-circle">⏱️</div>
+      <div>
+        <div style="font-size:0.65rem;color:var(--text-muted);font-weight:700;text-transform:uppercase">Rest Timer</div>
+        <div class="timer-dock-countdown" id="timer-countdown-text">01:15</div>
+      </div>
+    </div>
+    <div class="timer-dock-controls">
+      <button class="timer-ctrl-btn" id="timer-pause-btn">Pause</button>
+      <button class="timer-ctrl-btn" onclick="addTimerSeconds(30)">+30s</button>
+      <button class="timer-ctrl-btn" style="color:var(--accent-rose)" onclick="resetRestTimer()">✕</button>
+    </div>
+  </div>
+
+  <div class="app-container">
+    
+    <!-- App Header & User Profile -->
+    <header class="app-header">
+      <div class="profile-summary">
+        <div class="avatar-badge">93➔75</div>
+        <div class="user-meta">
+          <h1>Arjun • Ankle-Safe Coach</h1>
+          <div class="user-tags">
+            <span class="tag tag-cyan">27yo • 182 cm (6'0")</span>
+            <span class="tag tag-emerald">93 kg ➔ 84 kg (3-Mo) ➔ 75 kg</span>
+            <span class="tag tag-rose">Left ORIF (2 Screws)</span>
+            <span class="tag tag-amber">10 AM–7 PM Desk Job</span>
+          </div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="icon-btn" onclick="openSafetyModal()" title="Safety & Hardware Guide">⚠️</button>
+        <button class="icon-btn" onclick="startRestTimer(75)" title="Quick 75s Timer">⏱️</button>
+      </div>
+    </header>
+
+    <!-- Gym Location & Equipment Floor Guide Banner -->
+    <div class="gym-location-banner" onclick="openGymGuideModal()" title="View Yes Fit Gym Machine & Floor Guide">
+      <div class="gym-banner-left">
+        <span class="gym-pin-icon">📍</span>
+        <div class="gym-info-text">
+          <span class="gym-name-bold">Yes Fit Gym</span> • <span class="gym-city-text">Ambaji Hwy, Virpur, Palanpur (385001)</span>
+        </div>
+      </div>
+      <span class="gym-guide-action">Floor Machines ➔</span>
+    </div>
+
+    <!-- Pre-Workout Pain Check-In Gate (Dynamic Slider 0-10) -->
+    <section id="pain-gate-container"></section>
+
+    <!-- Phase Selector (Month 1 Adaptation | Month 2 Dense Strength | Month 3 Power & Supersets) -->
+    <section id="phase-selector-container"></section>
+
+    <!-- Main Tab: WORKOUT -->
+    <div class="tab-panel active" id="tab-workout">
+      <!-- 7-Day Split Tab Carousel -->
+      <section id="day-tabs-container" class="day-tabs-wrapper"></section>
+
+      <!-- Pinned Mandatory 8-10 Min Ankle Prep Block -->
+      <section id="ankle-prep-container"></section>
+
+      <!-- Workout Exercises Content Area -->
+      <main id="workout-content-area"></main>
+    </div>
+
+    <!-- Dedicated Tab: ANKLE PREP & REHAB -->
+    <div class="tab-panel" id="tab-prep">
+      <div class="day-overview-card">
+        <div class="day-header-flex">
+          <div>
+            <div class="day-main-title">🦶 Left Ankle Biomechanical Armor</div>
+            <div class="day-main-sub">Targeted peroneal strengthening, tripod grounding & syndesmosis protection</div>
+          </div>
+          <span class="tag tag-emerald">Rehab Protocol</span>
+        </div>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-card-header">
+          <div>
+            <div class="exercise-name">Left Ankle Surgical Context & Syndesmosis Defense</div>
+            <div class="exercise-muscles">March 2026 ORIF: Medial plate, fibular rod, 2 intact syndesmotic screws</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:0.8rem;line-height:1.6;color:var(--text-secondary)">
+          <p>
+            Your left ankle relies on two distal syndesmotic screws to bridge and stabilize the tibia and fibula. The known tendency to roll onto the outer border of your foot (inversion bias) places abnormal lateral shearing across these screws and weakens the healing syndesmotic syndesmosis.
+          </p>
+          <div style="background:rgba(16, 185, 129, 0.1);border-left:3px solid var(--accent-emerald);padding:8px 12px;margin:10px 0;border-radius:4px;color:#a7f3d0">
+            <strong>The Golden Biomechanical Rule:</strong> In every leg exercise, hip thrust, leg press, and flat walk, consciously press 80% of your forefoot pressure through the <strong>1st Metatarsal head (base of the big toe)</strong>. This forces your Peroneus Longus to fire and prevents the outer foot rolling habit.
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-card-header">
+          <div>
+            <div class="exercise-name">🚫 Strictly Forbidden Exercises (Never Attempt)</div>
+            <div class="exercise-muscles">Orthopedic hazards that risk distal screw loosening or anterior impingement</div>
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <ul style="list-style:none;font-size:0.78rem;color:#fecdd3">
+            <li style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05)">❌ <strong>Running & Jogging:</strong> 2.5x bodyweight ground impact jolts directly through screws.</li>
+            <li style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05)">❌ <strong>Jumping Rope & Box Jumps:</strong> Explosive ankle dorsiflexion-plantarflexion landing torsion.</li>
+            <li style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05)">❌ <strong>Burpees & Jumping Jacks:</strong> Unstable multi-directional shear.</li>
+            <li style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05)">❌ <strong>Heavy Barbell Back/Front Squats:</strong> Demands extreme left ankle dorsiflexion, pinching anterior plate.</li>
+            <li style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05)">❌ <strong>Walking / Bulgarian Split Lunges:</strong> Severe rear-foot shear stress and rotational instability.</li>
+            <li style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05)">❌ <strong>Standing Heavy Calf Raises:</strong> Direct focal lever arm stress across fibular rod.</li>
+            <li style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05)">❌ <strong>BOSU Balls & Wobble Boards:</strong> Dangerous sudden inversion roll hazard.</li>
+            <li style="padding:6px 0">❌ <strong>Treadmill Inclines &gt; 0%:</strong> Forces acute dorsiflexion pinching against the plate.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: DIET -->
+    <div class="tab-panel" id="tab-diet">
+      <div id="diet-content-area"></div>
+    </div>
+
+    <!-- Tab: PROGRESS TRACKER -->
+    <div class="tab-panel" id="tab-progress">
+      <div id="progress-content-area"></div>
+    </div>
+
+  </div> <!-- End App Container -->
+
+  <!-- Red-Flag Safety Modal -->
+  <div class="modal-overlay" id="safety-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">🚨 Red-Flag Safety & Orthopedic Rules</div>
+        <button class="modal-close-btn" onclick="closeSafetyModal()">✕</button>
+      </div>
+      
+      <div style="font-size:0.82rem;line-height:1.6;color:var(--text-secondary)">
+        <h4 style="color:#fff;margin-bottom:4px">1. The 24-Hour Recovery Rule</h4>
+        <p style="background:rgba(255,255,255,0.04);padding:10px;border-radius:6px;border-left:3px solid var(--accent-emerald)">
+          Your left ankle pain must return to baseline (≤ 2–3/10) within 24 hours of every training session, with ZERO next-morning visible swelling, joint puffiness, or skin heat. If pain lingers into the next day, you overreached.
+        </p>
+
+        <h4 style="color:#f43f5e;margin-top:14px;margin-bottom:4px">2. Immediate Stop-Workout Criteria</h4>
+        <ul class="safety-warning-list">
+          <li><strong>Sharp localized pain:</strong> Any acute 'stabbing' sensation directly over the medial plate or fibular screws.</li>
+          <li><strong>Observable swelling:</strong> Visible puffiness or skin redness over either malleolus during or after exercise.</li>
+          <li><strong>Involuntary limp:</strong> Inability to walk with symmetrical gait and equal weight distribution.</li>
+          <li><strong>Mechanical clicking:</strong> Sensation of catching, popping, or loose feeling inside the joint mortise.</li>
+          <li><strong>Outer foot rolling:</strong> If fatigue causes the left foot to roll onto its outer pinky edge during a set.</li>
+        </ul>
+
+        <h4 style="color:#38bdf8;margin-top:14px;margin-bottom:4px">3. Acute Swelling Management Protocol</h4>
+        <p>If pain hits ≥4/10 or swelling appears:</p>
+        <ol style="margin-left:20px;margin-top:6px;color:#cbd5e1;font-size:0.78rem">
+          <li>Stop the workout immediately.</li>
+          <li>Lie down and elevate your left foot above heart level for 20 minutes.</li>
+          <li>Apply a cloth-wrapped ice pack to the ankle for 15 minutes.</li>
+          <li>Perform 20 slow, gentle unweighted seated ankle pumps to flush lymphatic edema.</li>
+          <li>Log your pain score in the app and take the next day as pure active recovery.</li>
+        </ol>
+      </div>
+
+      <div style="margin-top:16px;text-align:right">
+        <button class="primary-btn" style="width:auto;padding:8px 20px" onclick="closeSafetyModal()">Understood & Return</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Video & Quick Checklist Modal -->
+  <div class="modal-overlay" id="video-form-modal">
+    <div class="video-modal-card">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="color:#ff0033;font-size:1.2rem">▶</span>
+          <div class="modal-title" id="video-modal-title" style="color:#fff">Exercise Form</div>
+        </div>
+        <button class="modal-close-btn" onclick="closeVideoModal()">✕</button>
+      </div>
+
+      <div style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:12px">
+        Watch direct 15–30 second form demonstration on YouTube Shorts before starting your set:
+      </div>
+
+      <a href="#" id="video-modal-link" target="_blank" rel="noopener noreferrer" class="yt-direct-open-btn">
+        <span style="font-size:1.1rem">▶</span>
+        <span>Open Form Video in YouTube Shorts</span>
+      </a>
+
+      <div style="background:rgba(255,255,255,0.04);border-radius:var(--radius-sm);padding:12px;margin-top:10px;border-left:3px solid var(--accent-emerald)">
+        <div style="font-size:0.75rem;font-weight:700;color:var(--accent-emerald);text-transform:uppercase;margin-bottom:6px">
+          Gym-Floor 3-Point Checklist:
+        </div>
+        <div id="video-modal-cues" style="font-size:0.75rem;color:#e2e8f0;line-height:1.5">
+          1. Joint alignment & grip.<br>2. Slow 3-second eccentric path.<br>3. 80% pressure on 1st MTP big-toe mound with zero outer foot roll.
+        </div>
+      </div>
+
+      <div style="margin-top:14px;text-align:right">
+        <button class="primary-btn" style="width:auto;padding:8px 18px" onclick="closeVideoModal()">Back to Workout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Yes Fit Gym (Palanpur) Floor & Machine Guide Modal -->
+  <div class="modal-overlay" id="gym-guide-modal">
+    <div class="modal-card gym-modal-card">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" style="display:flex;align-items:center;gap:8px">
+            <span>📍</span>
+            <span>Yes Fit Gym — Equipment & Floor Guide</span>
+          </div>
+          <div style="font-size:0.75rem;color:var(--text-muted);margin-top:2px">
+            Suvarnabhumi Arcade, Ambaji Highway, near HP Petrol Pump, Virpur, Palanpur 385001
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeGymGuideModal()">✕</button>
+      </div>
+
+      <div class="gym-guide-content">
+        <div class="gym-guide-alert">
+          <strong>⚡ 100% Calibrated for Your Ankle ORIF:</strong> Every exercise in your 6-day split corresponds directly to the machines and stations at Yes Fit Gym. If any machine is occupied during peak hours or your ankle feels stiff, tap the <strong>"Swap Exercise"</strong> button on that card.
+        </div>
+
+        <div class="gym-machines-list">
+          <!-- Machine 1: Leg Press -->
+          <div class="gym-item-card">
+            <div class="gym-item-thumb">
+              <img src="assets/high_foot_leg_press.jpg" alt="Leg Press Machine">
+            </div>
+            <div class="gym-item-details">
+              <div class="gym-item-title">1. 45° Sled Leg Press Machine</div>
+              <div class="gym-item-tags">
+                <span class="tag tag-cyan">Day 2: Tuesday</span>
+                <span class="tag tag-emerald">High-Foot Setup</span>
+              </div>
+              <p class="gym-item-desc">
+                <strong>Ankle Guardrail:</strong> Set feet at top edge of platform, shoulder-width apart, toes slightly outward (10°). Never let heels lift. Push through big-toe mound. Set safety stopper pins 2 notches high to prevent anterior screw pinch.
+              </p>
+            </div>
+          </div>
+
+          <!-- Machine 2: Seated Leg Extension -->
+          <div class="gym-item-card">
+            <div class="gym-item-thumb">
+              <img src="assets/seated_leg_extension.jpg" alt="Seated Leg Extension">
+            </div>
+            <div class="gym-item-details">
+              <div class="gym-item-title">2. Seated Leg Extension Machine</div>
+              <div class="gym-item-tags">
+                <span class="tag tag-cyan">Day 2: Tuesday</span>
+                <span class="tag tag-emerald">Pin-Loaded</span>
+              </div>
+              <p class="gym-item-desc">
+                <strong>Ankle Guardrail:</strong> Position shin roller pad 1.5–2 inches above ankle joint (away from incisions & screws). Smooth 3-second descent, no knee hyperextension.
+              </p>
+            </div>
+          </div>
+
+          <!-- Machine 3: Hamstring Curl -->
+          <div class="gym-item-card">
+            <div class="gym-item-thumb">
+              <img src="assets/seated_hamstring_curl.jpg" alt="Hamstring Curl Machine">
+            </div>
+            <div class="gym-item-details">
+              <div class="gym-item-title">3. Seated / Lying Hamstring Curl Machine</div>
+              <div class="gym-item-tags">
+                <span class="tag tag-cyan">Day 4: Thursday</span>
+                <span class="tag tag-emerald">Pin-Loaded</span>
+              </div>
+              <p class="gym-item-desc">
+                <strong>Ankle Guardrail:</strong> Roller pad sits comfortably above heel counter (lower Achilles). Maintain ankle in soft neutral 90° dorsiflexion without pointing toes or forcing flexion.
+              </p>
+            </div>
+          </div>
+
+          <!-- Machine 4: Hip Abduction & Adduction -->
+          <div class="gym-item-card">
+            <div class="gym-item-thumb">
+              <img src="assets/seated_hip_abduction.jpg" alt="Hip Abduction Machine">
+            </div>
+            <div class="gym-item-details">
+              <div class="gym-item-title">4. Seated Hip Abductor & Adductor Stations</div>
+              <div class="gym-item-tags">
+                <span class="tag tag-cyan">Day 2 & Day 4</span>
+                <span class="tag tag-emerald">Pelvic Stability</span>
+              </div>
+              <p class="gym-item-desc">
+                <strong>Ankle Guardrail:</strong> Keeps knees and hips balanced to prevent foot rolling. Rest feet flat on foot pegs; keep shins neutral with zero outward roll.
+              </p>
+            </div>
+          </div>
+
+          <!-- Machine 5: Dual Cable Crossover & Pulley Columns -->
+          <div class="gym-item-card">
+            <div class="gym-item-thumb">
+              <img src="assets/cable_lateral_raise.jpg" alt="Cable Station">
+            </div>
+            <div class="gym-item-details">
+              <div class="gym-item-title">5. Dual Adjustable Cable Crossover & Pulleys</div>
+              <div class="gym-item-tags">
+                <span class="tag tag-cyan">Day 1, 3, 5 & 6</span>
+                <span class="tag tag-emerald">Multi-Angle Cables</span>
+              </div>
+              <p class="gym-item-desc">
+                <strong>Exercises at Yes Fit Gym:</strong> Cable Lateral Raises, Rope Triceps Pushdown, Face Pulls with External Rotation, Seated Cable Row, Pallof Anti-Rotation Press, Cable Y-Raises.
+              </p>
+            </div>
+          </div>
+
+          <!-- Machine 6: Lat Pulldown Station -->
+          <div class="gym-item-card">
+            <div class="gym-item-thumb">
+              <img src="assets/lat_pulldown.jpg" alt="Lat Pulldown Machine">
+            </div>
+            <div class="gym-item-details">
+              <div class="gym-item-title">6. Lat Pulldown Station (Neutral & Wide Bars)</div>
+              <div class="gym-item-tags">
+                <span class="tag tag-cyan">Day 3 & Day 5</span>
+                <span class="tag tag-emerald">Upper Back / Posture</span>
+              </div>
+              <p class="gym-item-desc">
+                <strong>Ankle Guardrail:</strong> Lock thigh pad securely. Keep both feet planted flat under knees. Wednesday uses Close-Grip V-Bar; Friday uses Wide-Grip Lat Bar.
+              </p>
+            </div>
+          </div>
+
+          <!-- Machine 7: Adjustable Incline Benches & Free Dumbbells -->
+          <div class="gym-item-card">
+            <div class="gym-item-thumb">
+              <img src="assets/incline_db_press.jpg" alt="Incline Dumbbell Bench">
+            </div>
+            <div class="gym-item-details">
+              <div class="gym-item-title">7. Adjustable Benches & Dumbbell Free-Weights</div>
+              <div class="gym-item-tags">
+                <span class="tag tag-cyan">Day 1, 3, 5</span>
+                <span class="tag tag-emerald">2.5 kg – 35+ kg Rack</span>
+              </div>
+              <p class="gym-item-desc">
+                <strong>Exercises:</strong> Incline DB Press (30°), Seated DB Shoulder Press, Chest-Supported DB Row, Incline Hammer Curls, Flat DB Press. Plant left tripod foot flat on floor.
+              </p>
+            </div>
+          </div>
+
+          <!-- Machine 8: 45° Roman Chair / Back Extension -->
+          <div class="gym-item-card">
+            <div class="gym-item-thumb">
+              <img src="assets/back_extension_45.jpg" alt="45 Degree Back Extension">
+            </div>
+            <div class="gym-item-details">
+              <div class="gym-item-title">8. 45° Roman Chair / Hyperextension Bench</div>
+              <div class="gym-item-tags">
+                <span class="tag tag-cyan">Day 4: Thursday</span>
+                <span class="tag tag-emerald">Posterior Chain</span>
+              </div>
+              <p class="gym-item-desc">
+                <strong>Ankle Guardrail:</strong> Secure heels flat against footplate and calves under padded rolls. Pad set right below hip crease; hinge at hips, not spine.
+              </p>
+            </div>
+          </div>
+
+          <!-- Machine 9: Barbell / Smith Hip Thrust Station -->
+          <div class="gym-item-card">
+            <div class="gym-item-thumb">
+              <img src="assets/hip_thrust.jpg" alt="Hip Thrust Station">
+            </div>
+            <div class="gym-item-details">
+              <div class="gym-item-title">9. Hip Thrust Station (Bench + Barbell / Smith)</div>
+              <div class="gym-item-tags">
+                <span class="tag tag-cyan">Day 2: Tuesday</span>
+                <span class="tag tag-emerald">Pure Glute Drive</span>
+              </div>
+              <p class="gym-item-desc">
+                <strong>Ankle Guardrail:</strong> Shins must be 100% vertical at top. Drive through big-toe ball and heel. Zero ankle dorsiflexion load on healing screws.
+              </p>
+            </div>
+          </div>
+
+          <!-- Machine 10: Flat Treadmills & Stationary Bikes -->
+          <div class="gym-item-card">
+            <div class="gym-item-thumb">
+              <img src="assets/bench_knee_tucks.jpg" alt="Cardio Zone">
+            </div>
+            <div class="gym-item-details">
+              <div class="gym-item-title">10. Cardio Zone: Treadmill & Upright Bike</div>
+              <div class="gym-item-tags">
+                <span class="tag tag-cyan">Every Training Day</span>
+                <span class="tag tag-rose">Strict Flat 0%</span>
+              </div>
+              <p class="gym-item-desc">
+                <strong>Cardio Protocol:</strong> Treadmill walking STRICTLY at 0.0% incline (4.5–4.8 km/h). Stationary cycling at 65–75 RPM with mid-foot centered on pedal.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-sm);padding:12px;margin-top:14px;font-size:0.75rem;line-height:1.6;color:var(--text-secondary)">
+          <div style="font-weight:700;color:var(--accent-cyan);margin-bottom:4px">👟 Essential Gym Floor Advice for Yes Fit Gym:</div>
+          • <strong>Gym Footwear:</strong> Wear flat, firm-soled shoes (Converse, flat training shoes, or minimalist zero-drop shoes). DO NOT wear thick, squishy running sneakers—soft foam causes your left ankle to wobble and roll onto its outer edge.<br>
+          • <strong>Busy Equipment:</strong> If a machine is taken during peak gym hours, tap the <strong>"Gym Equipment Busy"</strong> swap button on that card for an instant free-weight/cable alternative.<br>
+          • <strong>Hydration:</strong> Carry a 1-liter bottle to sip between sets to hit your 3.5L daily target.
+        </div>
+      </div>
+
+      <div style="margin-top:16px;text-align:right">
+        <button class="primary-btn" style="width:auto;padding:8px 20px" onclick="closeGymGuideModal()">Got It & Return</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-tab="workout">
+      <span class="nav-icon">🏋️</span>
+      <span>Workout</span>
+    </button>
+    <button class="nav-item" data-tab="prep">
+      <span class="nav-icon">🦶</span>
+      <span>Ankle Care</span>
+    </button>
+    <button class="nav-item" data-tab="diet">
+      <span class="nav-icon">🥗</span>
+      <span>Diet</span>
+    </button>
+    <button class="nav-item" data-tab="progress">
+      <span class="nav-icon">📈</span>
+      <span>Progress</span>
+    </button>
+    <button class="nav-item" data-tab="safety">
+      <span class="nav-icon">⚠️</span>
+      <span>Safety</span>
+    </button>
+  </nav>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then((reg) => {
+          console.log('AnkleGuard PWA ServiceWorker active:', reg.scope);
+        }).catch((err) => {
+          console.log('ServiceWorker registration skipped:', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
