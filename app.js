@@ -899,10 +899,15 @@ function renderWorkoutTab() {
         </div>
 
         <!-- Interactive Sets Table -->
+        <div class="weight-instruction-banner">
+          <span class="weight-instruction-badge">💡 Target Load:</span>
+          <span class="weight-instruction-text">${phaseInfo.weightKg}</span>
+        </div>
+
         <div class="sets-table-wrapper">
           <div class="sets-table-header">
             <div>Set</div>
-            <div>Target / Weight</div>
+            <div>Weight (kg)</div>
             <div>Reps Done</div>
             <div>Done</div>
           </div>
@@ -912,14 +917,25 @@ function renderWorkoutTab() {
       const setKey = `${today}_${ex.id}_${s}`;
       const isCompleted = !!appState.completedSets[setKey];
       const savedData = appState.actualSetData[setKey] || {};
-      const defaultWeight = phaseInfo.weightKg.replace(/[^0-9.]/g, "") || "";
+      
+      // Clean numeric weight extraction (e.g. extracts "14" from "14 kg each hand...")
+      const cleanTargetMatch = String(phaseInfo.weightKg || "").match(/([0-9]+(?:\.[0-9]+)?)/);
+      const defaultWeight = cleanTargetMatch ? cleanTargetMatch[1] : "";
+      
+      // Auto-sanitize corrupted string concatenations (e.g. 141414810) from previous bug
+      let currentWeightVal = (savedData.weight !== undefined && savedData.weight !== null && savedData.weight !== "") 
+        ? savedData.weight 
+        : defaultWeight;
+      if (currentWeightVal && parseFloat(currentWeightVal) > 500) {
+        currentWeightVal = defaultWeight;
+      }
 
       html += `
         <div class="set-row ${isCompleted ? "done" : ""}" id="set-row-${ex.id}-${s}">
           <div class="set-index">${s + 1}</div>
           <div class="set-input-group">
-            <input type="text" class="set-input" placeholder="${phaseInfo.weightKg}" 
-              value="${savedData.weight || defaultWeight}" 
+            <input type="number" step="0.5" class="set-input" placeholder="${defaultWeight || 'kg'}" 
+              value="${currentWeightVal}" 
               oninput="handleSetDataChange('${ex.id}', ${s}, 'weight', this.value)">
             <span class="set-unit">kg</span>
           </div>
