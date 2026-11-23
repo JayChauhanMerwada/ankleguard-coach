@@ -1,5 +1,5 @@
 // Service Worker for AnkleGuard Coach - 100% Offline Gym Operation
-const CACHE_NAME = 'ankleguard-cache-v2';
+const CACHE_NAME = 'ankleguard-cache-v3';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -13,8 +13,10 @@ const ASSETS_TO_CACHE = [
   './assets/flat_db_press.jpg',
   './assets/chest_supported_machine_press.jpg',
   './assets/seated_db_shoulder_press.jpg',
+  './assets/seated_machine_shoulder_press.jpg',
   './assets/cable_lateral_raise.jpg',
   './assets/cable_triceps_pushdown.jpg',
+  './assets/overhead_cable_triceps.jpg',
   './assets/dead_bug_core.jpg',
   './assets/hip_thrust.jpg',
   './assets/seated_leg_extension.jpg',
@@ -32,7 +34,9 @@ const ASSETS_TO_CACHE = [
   './assets/single_leg_glute_bridge.jpg',
   './assets/bench_knee_tucks.jpg',
   './assets/cable_y_raise.jpg',
-  './assets/ankle_eversion.jpg'
+  './assets/ankle_eversion.jpg',
+  './assets/seated_towel_calf_stretch.jpg',
+  './assets/wall_supported_heel_raise.jpg'
 ];
 
 self.addEventListener('install', (event) => {

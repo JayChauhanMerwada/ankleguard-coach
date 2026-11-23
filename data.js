@@ -82,7 +82,7 @@ const ANKLE_PREP_ROUTINE = [
     title: "3. Gentle Seated Towel Calf & Soleus Stretch",
     sets: "2 sets",
     reps: "25 seconds gentle hold per leg",
-    image: "assets/ankle_eversion.jpg",
+    image: "assets/seated_towel_calf_stretch.jpg",
     videoQuery: "seated towel calf stretch achilles physical therapy shorts",
     purpose: "Decompresses Achilles tendon and soleus tension safely without bodyweight compressive stress.",
     postureSteps: {
@@ -102,7 +102,7 @@ const ANKLE_PREP_ROUTINE = [
     title: "4. Supported Big-Toe-Grounded Heel Raises",
     sets: "2 sets",
     reps: "12 controlled reps (3s up, 2s peak hold, 3s down)",
-    image: "assets/ankle_eversion.jpg",
+    image: "assets/wall_supported_heel_raise.jpg",
     videoQuery: "wall supported heel raises big toe pressure shorts",
     purpose: "Re-educates medial column weight distribution, directly stopping the outer-border rolling habit.",
     postureSteps: {
@@ -1094,7 +1094,7 @@ const WORKOUT_SPLIT = {
           secondary: ["Triceps"],
           ankleSafety: ["85° Backrest", "Move Direct to B2"]
         },
-        image: "assets/seated_db_shoulder_press.jpg",
+        image: "assets/seated_machine_shoulder_press.jpg",
         videoQuery: "seated machine shoulder press proper form shorts",
         postureSteps: {
           step1: { title: "Step 1: Machine Setup", desc: "Sit deep with backrest at 85°. Handles at chin height with elbows under wrists." },
@@ -1174,7 +1174,7 @@ const WORKOUT_SPLIT = {
           secondary: ["Brachialis"],
           ankleSafety: ["Cable Tension", "Athletic Soft Knees"]
         },
-        image: "assets/cable_lateral_raise.jpg",
+        image: "assets/overhead_cable_triceps.jpg",
         videoQuery: "overhead cable tricep extension rope form shorts",
         postureSteps: {
           step1: { title: "Step 1: Lateral Raise Burn", desc: "Perform 12 reps of Cable Lateral Raises leading with elbows to shoulder height." },
