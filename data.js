@@ -146,12 +146,12 @@ const WORKOUT_SPLIT = {
           step3: { title: "Step 3: Drive & Ankle Tripod", desc: "Exhale and press dumbbells up and slightly inward. Drive through left foot with 80% pressure on big-toe mound. Zero ankle rolling." }
         },
         phaseData: {
-          m1: { sets: 3, reps: "10–12 reps", weightKg: "16 kg / DB", tempo: "3-1-1-0", restSec: 75 },
-          m2: { sets: 4, reps: "6–8 reps", weightKg: "20 kg / DB", tempo: "3-1-1-0", restSec: 90 },
-          m3: { sets: 4, reps: "6–8 reps (Explosive)", weightKg: "22 kg / DB", tempo: "2-0-X-0", restSec: 90 }
+          m1: { sets: 3, reps: "10–12 reps", weightKg: "16 kg each hand (16+16 kg DBs • Warmup: 10–12.5 kg)", tempo: "3-1-1-0", restSec: 75 },
+          m2: { sets: 4, reps: "6–8 reps", weightKg: "20 kg each hand (20+20 kg DBs)", tempo: "3-1-1-0", restSec: 90 },
+          m3: { sets: 4, reps: "6–8 reps (Explosive)", weightKg: "22 kg each hand (22+22 kg DBs)", tempo: "2-0-X-0", restSec: 90 }
         },
         cues: {
-          setup: "Set adjustable bench to 30° incline. Sit back with dumbbells on knees. Kick dumbbells up to shoulders while planting both feet flat on floor.",
+          setup: "Set adjustable bench to 30° incline. Pick two identical dumbbells (e.g. 16 kg in left hand + 16 kg in right hand). Kick dumbbells up to shoulders.",
           tripodFoot: "Ground left foot into floor with equal weight on heel, big-toe mound, and pinky-toe mound. Do not cross ankles or tuck feet back.",
           breathingTempo: "Inhale and brace core on way down (3s). Pause 1s at bottom with elbows 45° to torso. Exhale and drive up crisply (1s).",
           mistakes: "Do not flare elbows to 90° (impinges shoulders). Do not bounce weights off chest. Keep glutes and upper back glued to bench."
@@ -171,7 +171,7 @@ const WORKOUT_SPLIT = {
       },
       {
         id: "d1-e2",
-        name: "Chest-Supported Machine Press",
+        name: "Seated Machine Chest Press (Back-Supported Pin Machine)",
         targetMuscles: "Sternal Mid-Chest, Triceps, Serratus Anterior",
         muscleTags: {
           primary: ["Mid-Chest (Sternal Head)"],
@@ -179,22 +179,22 @@ const WORKOUT_SPLIT = {
           ankleSafety: ["Unloaded Lower Limbs", "Spine Supported"]
         },
         image: "assets/chest_supported_machine_press.jpg",
-        videoQuery: "seated chest supported machine press form shorts",
+        videoQuery: "seated machine chest press proper form shorts gym",
         postureSteps: {
-          step1: { title: "Step 1: Seat Height", desc: "Adjust seat so machine handles align directly with your nipple/mid-chest line. Press chest firmly against the chest pad." },
-          step2: { title: "Step 2: Press & Lock", desc: "Inhale, retract scapulae, press handles forward until arms are 95% extended without locking elbows." },
-          step3: { title: "Step 3: Controlled Eccentric", desc: "Resist the weight stack returning over 3 full seconds. Feel chest open without letting shoulders roll forward." }
+          step1: { title: "Step 1: Seat Height & Backrest Setup", desc: "Adjust seat height so handles align directly with your mid-chest / nipple line. Sit deep with your UPPER BACK and HIPS pressed firmly against the backrest pad (chest proud, NOT chest against pad)." },
+          step2: { title: "Step 2: Press & Elbow Tuck", desc: "Inhale, retract shoulder blades, and push handles forward until arms are 95% straight without locking elbows. Keep elbows tucked at 45° to torso." },
+          step3: { title: "Step 3: 3-Second Controlled Eccentric", desc: "Resist the weight stack returning over 3 full seconds. Feel deep chest stretch without letting shoulders roll forward." }
         },
         phaseData: {
-          m1: { sets: 3, reps: "10–12 reps", weightKg: "45 kg", tempo: "3-1-1-0", restSec: 75 },
-          m2: { sets: 4, reps: "6–8 reps", weightKg: "55 kg", tempo: "3-1-1-0", restSec: 90 },
-          m3: { sets: 4, reps: "6–8 reps", weightKg: "62.5 kg", tempo: "2-0-1-0", restSec: 90 }
+          m1: { sets: 3, reps: "10–12 reps", weightKg: "45 kg (Total Machine Stack • Warmup: 25–30 kg)", tempo: "3-1-1-0", restSec: 75 },
+          m2: { sets: 4, reps: "6–8 reps", weightKg: "55 kg (Total Machine Stack)", tempo: "3-1-1-0", restSec: 90 },
+          m3: { sets: 4, reps: "6–8 reps", weightKg: "62.5 kg (Total Machine Stack)", tempo: "2-0-1-0", restSec: 90 }
         },
         cues: {
-          setup: "Adjust seat height so handles align with mid-chest. Pull chest flush against support pad with spine tall.",
-          tripodFoot: "Keep feet resting flat on base pads without hyperextending left ankle.",
-          breathingTempo: "Inhale, retract shoulder blades, press handles away until arms are almost straight without locking elbows.",
-          mistakes: "Do not let shoulders roll forward at the end of the press. Keep chest proud."
+          setup: "Sit back with spine and hips flush against the backrest pad. Adjust seat so handles are at nipple level. Grab horizontal or neutral handles.",
+          tripodFoot: "Keep feet resting flat on floor/base pads without hyperextending left ankle. Zero foot shear.",
+          breathingTempo: "Inhale, retract shoulder blades, press handles away forward until arms are almost straight without locking elbows. Exhale.",
+          mistakes: "Do not let shoulders round forward at the end of the press. Keep your chest high against the back pad."
         },
         busyGymSwap: {
           name: "Seated Flat Dumbbell Bench Press",
@@ -226,9 +226,9 @@ const WORKOUT_SPLIT = {
           step3: { title: "Step 3: Overhead Drive", desc: "Exhale and press dumbbells overhead in a smooth arc without clanking weights at top. Inhale down in 3 seconds." }
         },
         phaseData: {
-          m1: { sets: 3, reps: "10–12 reps", weightKg: "14 kg / DB", tempo: "3-1-1-0", restSec: 75 },
-          m2: { sets: 4, reps: "6–8 reps", weightKg: "18 kg / DB", tempo: "3-1-1-0", restSec: 90 },
-          m3: { sets: 4, reps: "6–8 reps", weightKg: "20 kg / DB", tempo: "2-0-1-0", restSec: 90 }
+          m1: { sets: 3, reps: "10–12 reps", weightKg: "14 kg each hand (14+14 kg DBs • Warmup: 8–10 kg)", tempo: "3-1-1-0", restSec: 75 },
+          m2: { sets: 4, reps: "6–8 reps", weightKg: "18 kg each hand (18+18 kg DBs)", tempo: "3-1-1-0", restSec: 90 },
+          m3: { sets: 4, reps: "6–8 reps", weightKg: "20 kg each hand (20+20 kg DBs)", tempo: "2-0-1-0", restSec: 90 }
         },
         cues: {
           setup: "Set upright bench to 80°–85° (not fully 90° to prevent shoulder impingement). Sit deep with lower back supported.",
@@ -644,9 +644,9 @@ const WORKOUT_SPLIT = {
           step3: { title: "Step 3: 1s Hold & 3s Lower", desc: "Hold peak retraction for 1 second. Lower under complete muscular control over 3 seconds. Neck stays relaxed." }
         },
         phaseData: {
-          m1: { sets: 3, reps: "10–12 reps", weightKg: "16 kg / DB", tempo: "3-1-1-1", restSec: 75 },
-          m2: { sets: 4, reps: "6–8 reps", weightKg: "20 kg / DB", tempo: "3-1-1-1", restSec: 90 },
-          m3: { sets: 4, reps: "6–8 reps", weightKg: "22 kg / DB", tempo: "2-0-1-1", restSec: 90 }
+          m1: { sets: 3, reps: "10–12 reps", weightKg: "16 kg each hand (16+16 kg DBs • Warmup: 10–12.5 kg)", tempo: "3-1-1-1", restSec: 75 },
+          m2: { sets: 4, reps: "6–8 reps", weightKg: "20 kg each hand (20+20 kg DBs)", tempo: "3-1-1-1", restSec: 90 },
+          m3: { sets: 4, reps: "6–8 reps", weightKg: "22 kg each hand (22+22 kg DBs)", tempo: "2-0-1-1", restSec: 90 }
         },
         cues: {
           setup: "Set incline bench to 30°–45°. Lie face down with chest supported on pad, head extending off the top.",
@@ -764,9 +764,9 @@ const WORKOUT_SPLIT = {
           step3: { title: "Step 3: Brachialis Squeeze", desc: "Squeeze the outer arm (brachialis) for 1s at top. Lower slowly under full 3-second tension." }
         },
         phaseData: {
-          m1: { sets: 3, reps: "10–12 reps", weightKg: "12 kg / DB", tempo: "3-1-1-1", restSec: 60 },
-          m2: { sets: 4, reps: "8–10 reps", weightKg: "14 kg / DB", tempo: "3-1-1-1", restSec: 60 },
-          m3: { sets: 4, reps: "8 reps", weightKg: "16 kg / DB", tempo: "2-0-1-1", restSec: 60 }
+          m1: { sets: 3, reps: "10–12 reps", weightKg: "12 kg each hand (12+12 kg DBs • Warmup: 8–10 kg)", tempo: "3-1-1-1", restSec: 60 },
+          m2: { sets: 4, reps: "8–10 reps", weightKg: "14 kg each hand (14+14 kg DBs)", tempo: "3-1-1-1", restSec: 60 },
+          m3: { sets: 4, reps: "8 reps", weightKg: "16 kg each hand (16+16 kg DBs)", tempo: "2-0-1-1", restSec: 60 }
         },
         cues: {
           setup: "Sit back on 60° incline bench. Hold dumbbells with neutral palms-facing-each-other grip.",
@@ -1022,9 +1022,9 @@ const WORKOUT_SPLIT = {
           step3: { title: "Step 3: Press & Switch to A2", desc: "Exhale and press up crisply. Immediately rack dumbbells and move to Wide Lat Pulldown (A2) with 0s rest." }
         },
         phaseData: {
-          m1: { sets: 3, reps: "10 reps", weightKg: "18 kg / DB", tempo: "3-1-1-0", restSec: 0 },
-          m2: { sets: 4, reps: "6–8 reps", weightKg: "22 kg / DB", tempo: "3-1-1-0", restSec: 0 },
-          m3: { sets: 4, reps: "6–8 reps (Crisp)", weightKg: "24 kg / DB", tempo: "2-0-X-0", restSec: 0 }
+          m1: { sets: 3, reps: "10 reps", weightKg: "18 kg each hand (18+18 kg DBs • Warmup: 12–14 kg)", tempo: "3-1-1-0", restSec: 0 },
+          m2: { sets: 4, reps: "6–8 reps", weightKg: "22 kg each hand (22+22 kg DBs)", tempo: "3-1-1-0", restSec: 0 },
+          m3: { sets: 4, reps: "6–8 reps (Crisp)", weightKg: "24 kg each hand (24+24 kg DBs)", tempo: "2-0-X-0", restSec: 0 }
         },
         cues: {
           setup: "Lie flat on bench. Dumbbells over mid-chest. Immediately pair with Wide-Grip Lat Pulldown.",
