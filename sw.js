@@ -1,5 +1,5 @@
 // Service Worker for AnkleGuard Coach - 100% Offline Gym Operation
-const CACHE_NAME = 'ankleguard-cache-v3';
+const CACHE_NAME = 'ankleguard-cache-v4';
 
 const ASSETS_TO_CACHE = [
   './',
@@ -18,6 +18,7 @@ const ASSETS_TO_CACHE = [
   './assets/cable_triceps_pushdown.jpg',
   './assets/overhead_cable_triceps.jpg',
   './assets/dead_bug_core.jpg',
+  './assets/plank_core.jpg',
   './assets/hip_thrust.jpg',
   './assets/seated_leg_extension.jpg',
   './assets/high_foot_leg_press.jpg',
@@ -35,6 +36,7 @@ const ASSETS_TO_CACHE = [
   './assets/bench_knee_tucks.jpg',
   './assets/cable_y_raise.jpg',
   './assets/ankle_eversion.jpg',
+  './assets/resistance_band_ankle_eversion.jpg',
   './assets/seated_towel_calf_stretch.jpg',
   './assets/wall_supported_heel_raise.jpg'
 ];

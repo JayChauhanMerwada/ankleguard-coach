@@ -12,7 +12,7 @@ const USER_PROFILE = {
   milestone3MoKg: 84.0,
   targetPhysique: "Clean, compact, tight-waisted, dense relative strength & sharp posture (NOT bulky bodybuilding)",
   lifestyle: "9-Hour Desk Job (10:00 AM - 7:00 PM) - Scapular retraction, thoracic extension, deep core bracing priority",
-  schedule: "6 Days/Week (Mon–Sat), Sunday complete rest. 60–80 mins/session",
+  schedule: "6 Days/Week (Mon–Sat), Sunday complete rest. 60–75 mins/session",
   orthopedicStatus: "Left Ankle Post-ORIF (March 2026). Medial plate, fibular rod, 2 intact distal syndesmotic screws. Prone to mild inward tilt / outer-border foot roll. Zero high-impact, zero forced ankle dorsiflexion.",
   dietTarget: {
     calories: 1950,
@@ -30,9 +30,13 @@ const FORBIDDEN_EXERCISES = [
   { name: "Burpees & Jumping Jacks", reason: "Uncontrolled dynamic impact and multi-planar ankle shearing." },
   { name: "Heavy Barbell Squats", reason: "Requires acute left ankle dorsiflexion under heavy load, causing anterior impingement." },
   { name: "Walking & Bulgarian Split Lunges", reason: "High rear-foot shearing and unstable rotational ankle torque." },
+  { name: "Step-Ups (Any Bench / Box Height)", reason: "Excessive forward tibial shear and eccentric deceleration shock across healing syndesmotic screws." },
   { name: "Standing Heavy Calf Raises", reason: "Direct focal shearing on fibular rod and screw heads under maximum leverage." },
   { name: "BOSU Balls & Unstable Wobble Boards", reason: "Dangerous uncontrolled ankle inversion can rupture healing syndesmotic ligaments." },
-  { name: "Treadmill Inclines > 0%", reason: "Forced extreme dorsiflexion pinches the anterior ankle capsule against the plate." }
+  { name: "Treadmill Inclines > 0%", reason: "Forced extreme dorsiflexion pinches the anterior ankle capsule against the plate." },
+  { name: "Clamping Dumbbells Between Feet / Arches", reason: "Direct medial-lateral compressive torque on syndesmosis and fibular rod." },
+  { name: "Placing Towels or Wedges Under Forefoot During Bridges/Squats", reason: "Forces acute passive dorsiflexion, impinging anterior syndesmotic plate against screws. (Flat foot or slight heel elevation is safe)." },
+  { name: "Full Foot-Stacked Side Planks", reason: "Severe gravitational eversion shear directly across the lateral malleolar plate and screws. (Knee-supported side planks are 100% safe)." }
 ];
 
 const ANKLE_PREP_ROUTINE = [
@@ -62,7 +66,7 @@ const ANKLE_PREP_ROUTINE = [
     sets: "3 sets",
     reps: "15 reps with deliberate 2-second peak isometric hold",
     videoQuery: "resistance band ankle eversion physical therapy shorts",
-    image: "assets/ankle_eversion.jpg",
+    image: "assets/resistance_band_ankle_eversion.jpg",
     purpose: "Activates and hypertrophies the Peroneus Longus & Brevis to permanently stop the left outer-border rolling tendency.",
     postureSteps: {
       step1: { title: "Step 1: Anchor & Stance", desc: "Sit with legs extended. Loop light mini-band around both forefeet, or anchor band medially. Pin left heel firmly to floor." },
@@ -375,8 +379,8 @@ const WORKOUT_SPLIT = {
     dayName: "Tuesday",
     title: "Day 2: Lower A — Ankle-Safe Quad & Glute Overload",
     subtitle: "High-Foot Leg Press, Leg Extension, Hip Thrust, Hip Abduction + Bike Cardio",
-    sessionDuration: "65–75 mins",
-    cardioBlock: "15–20 min Stationary Upright Bike at 65–75 RPM (Low to moderate resistance, flat foot secured in pedal cage, zero impact)",
+    sessionDuration: "60–75 mins",
+    cardioBlock: "20–25 min Zone-2 Stationary Upright/Recumbent Bike at 70–85 RPM (Mid-foot pedal placement, flat foot in pedal cage, heart rate 125–140 BPM, zero ground reaction force)",
     exercises: [
       {
         id: "d2-e1",
@@ -412,10 +416,27 @@ const WORKOUT_SPLIT = {
           adjustCues: "Keep left shin vertical, focus on big-toe ground drive."
         },
         stiffAnkleSwap: {
-          name: "Floor Glute Bridge with Small Towel Roll under Left Forefoot",
-          videoQuery: "floor glute bridge form shorts",
-          reason: "Zero dorsiflexion angle; pure glute bridge on comfortable mat.",
-          adjustCues: "Place feet flat and lift hips using glutes only."
+          name: "Bilateral Floor Glute Bridge (Flat Tripod Foot or 1-inch Heel Block)",
+          weightKg: "Bodyweight (Optional 10 kg DB on hip)",
+          reps: "12–15 reps (2s glute hold)",
+          sets: 3,
+          tempo: "2-2-1-1",
+          restSec: 60,
+          image: "assets/hip_thrust.jpg",
+          videoQuery: "floor glute bridge flat foot proper form shorts",
+          reason: "Flat tripod foot or slight heel block maintains neutral ankle (0° dorsiflexion) and activates glutes without pinching anterior syndesmotic plate against screws. NEVER elevate forefoot.",
+          adjustCues: "Keep feet flat with big-toe drive; optional 1-inch foam block under heels only.",
+          postureSteps: {
+            step1: { title: "Step 1: Mat Setup & Neutral Foot", desc: "Lie flat on mat, knees bent 90°, feet shoulder-width flat on floor (or heels slightly elevated on 1-inch flat block)." },
+            step2: { title: "Step 2: Big-Toe & Heel Drive", desc: "Drive through heels and 1st metatarsals into floor. Prevent outward rolling of left foot." },
+            step3: { title: "Step 3: 2s Glute Squeeze", desc: "Bridge hips until straight knee-hip-shoulder line. Squeeze glutes for 2s. Lower in 2s." }
+          },
+          cues: {
+            setup: "Lie supine on gym mat, knees bent at 90°, feet flat on floor shoulder-width apart.",
+            tripodFoot: "Keep both feet flat or with a slight 1-inch block under HEELS only. NEVER put a towel under forefoot.",
+            breathingTempo: "Exhale driving hips up; squeeze glutes hard for 2 full seconds; inhale lowering down.",
+            mistakes: "Do not hyperextend lower back. Keep ribcage pulled down."
+          }
         }
       },
       {
@@ -446,10 +467,27 @@ const WORKOUT_SPLIT = {
           mistakes: "Do not kick the weight up violently. Do not place the shin pad onto the ankle joint or titanium plate site."
         },
         busyGymSwap: {
-          name: "Seated Dumbbell Quad Squeeze Extension",
-          videoQuery: "seated dumbbell leg extension form shorts",
-          reason: "Sit on high bench, clamp light dumbbell between arches, extend knees smoothly.",
-          adjustCues: "Use 8–10 kg dumbbell; focus on quad burn."
+          name: "Seated Resistance-Band Quad Extension (Bench Anchored)",
+          weightKg: "Medium-Heavy Resistance Band",
+          reps: "15–20 reps (2s peak hold)",
+          sets: 3,
+          tempo: "2-2-1-0",
+          restSec: 60,
+          image: "assets/seated_leg_extension.jpg",
+          videoQuery: "seated resistance band leg extension form shorts",
+          reason: "Band anchored to lower bench leg and looped ABOVE ankle on lower shin (NEVER on foot/arch). Eliminates foot clamping and dumbbell drop risks.",
+          adjustCues: "Anchor band securely around lower shin 2 inches above ankle; extend knee fully.",
+          postureSteps: {
+            step1: { title: "Step 1: Bench Anchor Setup", desc: "Sit tall on bench edge. Loop band securely to bench leg, and wrap other end around lower shin 2 inches ABOVE left ankle joint." },
+            step2: { title: "Step 2: Smooth Extension", desc: "Extend knee forward smoothly against band resistance without swinging." },
+            step3: { title: "Step 3: 2s VMO Peak Hold", desc: "Lock out knee and squeeze quadriceps for 2 seconds. Return slowly over 2 seconds." }
+          },
+          cues: {
+            setup: "Sit on high bench. Anchor band to bench post. Loop around lower shin ABOVE ankle.",
+            tripodFoot: "Keep ankle relaxed at 90°. Band must NEVER contact foot arch or toes.",
+            breathingTempo: "Exhale extending knee; squeeze quad for 2s; inhale controlling return in 2s.",
+            mistakes: "Do not anchor around forefoot. Do not jerk torso backward."
+          }
         },
         stiffAnkleSwap: {
           name: "Isometric Wall Sit with 90° Knee Angle",
@@ -492,10 +530,27 @@ const WORKOUT_SPLIT = {
           adjustCues: "Keep feet high on bar/sled; lower only to 90° knee angle."
         },
         stiffAnkleSwap: {
-          name: "Assisted High-Bench Step-Ups (Flat Foot)",
-          videoQuery: "dumbbell step ups proper form shorts",
-          reason: "Step up onto a low 12-inch bench driving purely through heel and big toe.",
-          adjustCues: "Hold handrails for balance; slow 3s descent."
+          name: "Seated Leg Extension Iso-Holds (Peak Quad Contraction)",
+          weightKg: "25–30 kg",
+          reps: "3 x 15s peak isometric hold",
+          sets: 3,
+          tempo: "15s static hold",
+          restSec: 60,
+          image: "assets/seated_leg_extension.jpg",
+          videoQuery: "seated leg extension isometric hold form shorts",
+          reason: "100% seated with zero ground-reaction impact; replaces dangerous step-ups with safe, high-tension quadriceps recruitment without tibial shear or screw strain.",
+          adjustCues: "Extend knees to full horizontal lockout and contract quads maximally for 15s.",
+          postureSteps: {
+            step1: { title: "Step 1: Machine Setup", desc: "Position roller pad across lower shins above ankle joint. Align knees with machine pivot axis." },
+            step2: { title: "Step 2: Full Knee Extension", desc: "Smoothly extend knees to full horizontal extension." },
+            step3: { title: "Step 3: 15s Isometric Squeeze", desc: "Contract quads with maximum effort for 15 seconds while breathing steadily. Lower with control." }
+          },
+          cues: {
+            setup: "Adjust seat back so knees align with axis. Pad on lower shin above hardware.",
+            tripodFoot: "Ankles stay relaxed at neutral 90°. Zero axial impact through heel or tibia.",
+            breathingTempo: "Breathe continuously through nose; do not hold breath during the 15s hold.",
+            mistakes: "Do not let knees sag below horizontal during the isometric hold."
+          }
         }
       },
       {
@@ -547,7 +602,7 @@ const WORKOUT_SPLIT = {
           secondary: ["Gluteus Maximus"],
           ankleSafety: ["Elevated Bench", "Reduces Toe Shear by 40%"]
         },
-        image: "assets/dead_bug_core.jpg",
+        image: "assets/plank_core.jpg",
         videoQuery: "bird dog exercise proper form shorts",
         postureSteps: {
           step1: { title: "Step 1: Bird-Dog Alignment", desc: "Hands under shoulders, knees under hips on mat. Reach opposite arm and leg in a straight laser line." },
@@ -566,10 +621,27 @@ const WORKOUT_SPLIT = {
           mistakes: "Do not let lower back sag in plank. Squeeze glutes and tuck pelvis under."
         },
         busyGymSwap: {
-          name: "Floor Dead Bugs + Side Plank on Forearm",
-          videoQuery: "side plank proper form shorts",
-          reason: "Floor alternatives requiring zero equipment.",
-          adjustCues: "Stack knees or stagger feet to protect left ankle."
+          name: "Floor Dead Bugs + Knee-Supported Side Plank",
+          weightKg: "Bodyweight",
+          reps: "10 dead bugs/side + 25s knee side plank/side",
+          sets: 3,
+          tempo: "3s pause per side",
+          restSec: 60,
+          image: "assets/plank_core.jpg",
+          videoQuery: "modified knee side plank proper form shorts",
+          reason: "Knees bent 90° with ankles completely unloaded behind hips eliminates lateral eversion shear across the left fibular plate and screws while intensely engaging obliques.",
+          adjustCues: "Bend knees 90° backward; keep ankles floating in air; hold straight knee-to-shoulder line.",
+          postureSteps: {
+            step1: { title: "Step 1: Dead Bugs", desc: "Lie supine, lower back pinned flat to mat, slowly extend opposite arm and leg while bracing deep core." },
+            step2: { title: "Step 2: 90° Knee Bend Side Plank", desc: "Roll onto forearm, bend both knees 90° backward so ankles rest safely unloaded behind hips." },
+            step3: { title: "Step 3: Hip Elevation & Hold", desc: "Elevate hips forming straight line from knees to shoulder. Hold for 25s per side." }
+          },
+          cues: {
+            setup: "Mat on floor. Dead bugs first, then immediately flip into 90° knee-supported side plank.",
+            tripodFoot: "Knees bent 90° so shins and ankles are completely off the floor. 0 kg ankle load.",
+            breathingTempo: "Deep diaphragmatic breathing while holding straight pelvic alignment.",
+            mistakes: "Do not do foot-stacked side planks. Never let hips sag toward floor."
+          }
         },
         stiffAnkleSwap: {
           name: "Hands-and-Knees Quadruped Isometric Core Brace",
@@ -584,8 +656,8 @@ const WORKOUT_SPLIT = {
     dayName: "Wednesday",
     title: "Day 3: Upper Pull & Desk-Posture Reset",
     subtitle: "Lat Pulldown, Chest-Supported Row, Face Pulls, Hammer Curls + Posture Walk",
-    sessionDuration: "65–75 mins",
-    cardioBlock: "18–22 min Flat 0% Treadmill Walk at 4.5–4.8 km/h (Thoracic open posture, chin tucked, 1st MTP big-toe rolling cue)",
+    sessionDuration: "60–75 mins",
+    cardioBlock: "20–25 min Flat 0.0% Treadmill Walk at 4.8–5.0 km/h (Strict 0% incline, upright posture, big-toe 1st MTP push-off cue, zero ankle pinching)",
     exercises: [
       {
         id: "d3-e1",
@@ -1207,52 +1279,74 @@ const WORKOUT_SPLIT = {
       },
       {
         id: "d5-e6",
-        name: "Core: Seated Bench Knee Tucks + Side Plank Holds",
+        name: "Core: Seated Bench Knee Tucks + Knee-Supported Side Plank Holds",
         targetMuscles: "Rectus Abdominis, Obliques, Serratus Anterior",
         muscleTags: {
           primary: ["Rectus Abdominis", "Obliques"],
           secondary: ["Hip Flexors"],
-          ankleSafety: ["Hovering Feet", "Zero Foot Impact"]
+          ankleSafety: ["Knees Bent 90°", "Zero Ankle Screw Shear"]
         },
         image: "assets/bench_knee_tucks.jpg",
         videoQuery: "seated bench knee tucks core form shorts",
         postureSteps: {
           step1: { title: "Step 1: Bench Edge Grip", desc: "Sit on bench edge, hands gripping sides behind hips. Lean torso back 30°." },
           step2: { title: "Step 2: Knee Tuck Crunch", desc: "Hover feet, exhale sharply and pull knees to chest. Squeeze abs tight for 1 second." },
-          step3: { title: "Step 3: Side Plank Finish", desc: "Drop to mat on forearm side plank. Hold straight hip line for 25–35 seconds per side." }
+          step3: { title: "Step 3: Knee-Supported Side Plank", desc: "Forearm on mat, bend both knees 90° backward so ankles float unloaded. Elevate hips for 25–35 seconds per side." }
         },
         phaseData: {
-          m1: { sets: 3, reps: "15 knee tucks + 25s side plank/side", weightKg: "Bodyweight", tempo: "2s pause", restSec: 60 },
-          m2: { sets: 3, reps: "15 knee tucks + 30s side plank/side", weightKg: "Bodyweight", tempo: "2s pause", restSec: 60 },
-          m3: { sets: 3, reps: "20 knee tucks + 35s side plank/side", weightKg: "Bodyweight", tempo: "2s pause", restSec: 60 }
+          m1: { sets: 3, reps: "15 knee tucks + 25s knee side plank/side", weightKg: "Bodyweight", tempo: "2s pause", restSec: 60 },
+          m2: { sets: 3, reps: "15 knee tucks + 30s knee side plank/side", weightKg: "Bodyweight", tempo: "2s pause", restSec: 60 },
+          m3: { sets: 3, reps: "20 knee tucks + 35s knee side plank/side", weightKg: "Bodyweight", tempo: "2s pause", restSec: 60 }
         },
         cues: {
           setup: "Sit on end of flat bench, grip edges with hands. Lean back 30°, extend legs forward then pull knees to chest.",
-          tripodFoot: "Feet hover in air during tucks—zero floor impact or ankle dorsiflexion.",
+          tripodFoot: "CRITICAL: Side plank MUST be done with knees bent 90° so ankles float completely unloaded behind knees. Zero lateral shear on screws.",
           breathingTempo: "Exhale sharply as knees touch chest. Squeeze abs tight. Inhale as legs extend.",
-          mistakes: "Do not swing legs with momentum. Use strict abdominal contraction."
+          mistakes: "NEVER perform foot-stacked side planks. Keep hips elevated in straight knee-to-shoulder line."
         },
         busyGymSwap: {
-          name: "Floor Reverse Crunches + Mat Side Plank",
-          videoQuery: "reverse crunch form shorts",
-          reason: "Floor alternatives requiring only a gym mat.",
-          adjustCues: "Lift pelvis towards ribs on reverse crunches."
+          name: "Floor Reverse Crunches + Knee-Supported Side Plank",
+          weightKg: "Bodyweight",
+          reps: "15 reverse crunches + 25s knee side plank/side",
+          sets: 3,
+          tempo: "2s pause",
+          restSec: 60,
+          image: "assets/bench_knee_tucks.jpg",
+          videoQuery: "modified knee side plank proper form shorts",
+          reason: "Knees bent 90° completely spares left ankle syndesmosis from lateral eversion shear while torching obliques.",
+          adjustCues: "Bend knees 90° backward so ankles float in the air behind hips; lift hips high.",
+          postureSteps: {
+            step1: { title: "Step 1: Reverse Crunches", desc: "Lie on mat, pull knees to chest tilting pelvis upward to activate lower rectus abdominis." },
+            step2: { title: "Step 2: 90° Knee Side Plank", desc: "Turn to side, forearm on mat, bend knees 90° backward so feet and ankles float unloaded." },
+            step3: { title: "Step 3: Oblique Lockout", desc: "Elevate hips into rigid straight line from knees to shoulders. Hold 25s per side." }
+          },
+          cues: {
+            setup: "Floor mat. Complete reverse crunches, then immediately transition to knee side plank.",
+            tripodFoot: "Keep ankles completely off the ground behind bent knees. Zero shear on screws.",
+            breathingTempo: "Exhale on knee crunch; steady breathing during side plank hold.",
+            mistakes: "Never stack feet or put bodyweight onto lateral left foot border."
+          }
         },
         stiffAnkleSwap: {
           name: "Seated Bench Isometric Abdominal Vacuum & Brace",
+          weightKg: "Bodyweight",
+          reps: "4 rounds of 15s vacuum holds",
+          sets: 4,
+          tempo: "15s static vacuum",
+          restSec: 45,
+          image: "assets/bench_knee_tucks.jpg",
           videoQuery: "stomach vacuum exercise proper form shorts",
           reason: "Sit tall, exhale all air, draw belly button in for 15s hold.",
           adjustCues: "Perform 4 rounds of 15s vacuum holds."
-        }
-      }
+        }}
     ]
   },
   6: {
     dayName: "Saturday",
     title: "Day 6: Posture Reset, Deep Core & Ankle Armor",
     subtitle: "Peroneal Band Holds, Cable Y-Raises, Seated March & 25 min Zone-2 Conditioning",
-    sessionDuration: "60–70 mins",
-    cardioBlock: "25 min Zone-2 Zero-Impact Conditioning (Stationary Bike at 70 RPM or Flat 0% Treadmill Walk with conscious 1st MTP big-toe roll cue)",
+    sessionDuration: "60–75 mins",
+    cardioBlock: "20–25 min Zone-2 Stationary Cycling at 70–80 RPM or Flat 0.0% Treadmill Walk (Active recovery fat oxidation & lymphatic flush)",
     exercises: [
       {
         id: "d6-e1",
@@ -1263,7 +1357,7 @@ const WORKOUT_SPLIT = {
           secondary: ["Anterior Tibialis Stabilizer"],
           ankleSafety: ["CRITICAL REHAB", "Stops Outer Border Roll"]
         },
-        image: "assets/ankle_eversion.jpg",
+        image: "assets/resistance_band_ankle_eversion.jpg",
         videoQuery: "band ankle eversion peroneus longus physical therapy shorts",
         postureSteps: {
           step1: { title: "Step 1: Band Anchor", desc: "Sit with legs out. Loop mini-band around left forefoot, anchored medially. Pin left heel to floor." },
@@ -1362,10 +1456,27 @@ const WORKOUT_SPLIT = {
           mistakes: "Do not let cable pull your hands back toward the pulley."
         },
         busyGymSwap: {
-          name: "Standing Banded Pallof Iso-Hold",
-          videoQuery: "banded pallof press hold form shorts",
-          reason: "Anchor mini-band to rack, step out and hold.",
-          adjustCues: "Keep athletic stance with soft knees."
+          name: "Seated Banded Pallof Iso-Hold on Bench",
+          weightKg: "Moderate Resistance Band",
+          reps: "3 x 20s hold per side",
+          sets: 3,
+          tempo: "20s static brace",
+          restSec: 60,
+          image: "assets/dead_bug_core.jpg",
+          videoQuery: "seated pallof press resistance band shorts",
+          reason: "Seated anti-rotation eliminates all standing rotational torque on left syndesmosis.",
+          adjustCues: "Sit upright on bench; clasp band at chest; press straight out and hold.",
+          postureSteps: {
+            step1: { title: "Step 1: Anchor & Seated Stance", desc: "Sit tall on bench with band anchored to side post at chest height." },
+            step2: { title: "Step 2: Symmetrical Press", desc: "Clasp hands together and press band straight out in front of sternum." },
+            step3: { title: "Step 3: Anti-Rotation Brace", desc: "Resist band pull for 20 seconds. Keep chest and shoulders locked square forward." }
+          },
+          cues: {
+            setup: "Sit upright with firm core brace. Hold band handles with both hands at center chest.",
+            tripodFoot: "Both feet flat on floor with tripod pressure, but core resists all rotation.",
+            breathingTempo: "Breathe through diaphragmatic brace without letting ribs flare.",
+            mistakes: "Do not let torso twist toward anchor point."
+          }
         },
         stiffAnkleSwap: {
           name: "Floor Dead Bug 30s Isometric Holds",

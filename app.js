@@ -516,20 +516,72 @@ function renderAnklePrepBanner() {
   container.innerHTML = html;
 }
 
+// Dynamic Swap Resolver Helper
+function getActiveExerciseData(ex, currentSwap, phaseKey) {
+  const basePhase = (ex.phaseData && ex.phaseData[phaseKey]) 
+    ? ex.phaseData[phaseKey] 
+    : { sets: 3, reps: "10–12", weightKg: "0 kg", tempo: "2-0-1-0", restSec: 60 };
+    
+  if (currentSwap === "original" || !currentSwap) {
+    return {
+      id: ex.id,
+      name: ex.name,
+      targetMuscles: ex.targetMuscles,
+      sets: basePhase.sets,
+      reps: basePhase.reps,
+      weightKg: basePhase.weightKg,
+      tempo: basePhase.tempo,
+      restSec: basePhase.restSec || 75,
+      image: ex.image,
+      videoQuery: ex.videoQuery || ex.name,
+      muscleTags: ex.muscleTags,
+      postureSteps: ex.postureSteps,
+      cues: ex.cues,
+      reason: null
+    };
+  }
+
+  const swapObj = currentSwap === "busy" ? ex.busyGymSwap : ex.stiffAnkleSwap;
+  if (!swapObj) {
+    return getActiveExerciseData(ex, "original", phaseKey);
+  }
+
+  return {
+    id: ex.id,
+    name: swapObj.name || ex.name,
+    targetMuscles: swapObj.targetMuscles || ex.targetMuscles,
+    sets: swapObj.sets || basePhase.sets,
+    reps: swapObj.reps || basePhase.reps,
+    weightKg: swapObj.weightKg || basePhase.weightKg,
+    tempo: swapObj.tempo || basePhase.tempo,
+    restSec: swapObj.restSec || basePhase.restSec || 60,
+    image: swapObj.image || ex.image,
+    videoQuery: swapObj.videoQuery || swapObj.name,
+    muscleTags: swapObj.muscleTags || ex.muscleTags,
+    postureSteps: swapObj.postureSteps || ex.postureSteps,
+    cues: swapObj.cues || ex.cues,
+    reason: swapObj.reason || null
+  };
+}
+
 // Exercise Set Inputs & Completion Handling
-function handleSetDataChange(exerciseId, setIdx, field, val) {
+function handleSetDataChange(exerciseId, setIdx, field, val, currentSwap = "original") {
   const today = getTodayDateStr();
-  const key = `${today}_${exerciseId}_${setIdx}`;
+  const key = currentSwap === "original" ? `${today}_${exerciseId}_${setIdx}` : `${today}_${exerciseId}_${currentSwap}_${setIdx}`;
   if (!appState.actualSetData[key]) {
     appState.actualSetData[key] = { weight: "", reps: "" };
+  }
+  // Sanitize corrupt numerical values
+  if (field === "weight" && parseFloat(val) > 500) {
+    val = "";
   }
   appState.actualSetData[key][field] = val;
   saveState();
 }
 
-function toggleSetComplete(exerciseId, setIdx, restSec) {
+function toggleSetComplete(exerciseId, setIdx, restSec, currentSwap = "original") {
   const today = getTodayDateStr();
-  const key = `${today}_${exerciseId}_${setIdx}`;
+  const key = currentSwap === "original" ? `${today}_${exerciseId}_${setIdx}` : `${today}_${exerciseId}_${currentSwap}_${setIdx}`;
   appState.completedSets[key] = !appState.completedSets[key];
   saveState();
 
@@ -747,35 +799,33 @@ function renderWorkoutTab() {
   // Exercises
   day.exercises.forEach((ex) => {
     const currentSwap = appState.exerciseSwaps[ex.id] || "original";
-    const phaseInfo = ex.phaseData[phaseKey];
     const isBusySwap = currentSwap === "busy";
     const isStiffSwap = currentSwap === "stiff";
+    const activeEx = getActiveExerciseData(ex, currentSwap, phaseKey);
 
-    const displayName = isBusySwap ? ex.busyGymSwap.name : 
-                        isStiffSwap ? ex.stiffAnkleSwap.name : ex.name;
+    const displayName = activeEx.name;
+    const displayReason = activeEx.reason;
+    const videoQuery = activeEx.videoQuery || activeEx.name;
+    const steps = activeEx.postureSteps;
+    const muscleTags = activeEx.muscleTags;
+    const cues = activeEx.cues;
+    const activeImage = activeEx.image;
 
-    const displayReason = isBusySwap ? ex.busyGymSwap.reason :
-                          isStiffSwap ? ex.stiffAnkleSwap.reason : null;
-
-    const videoQuery = isBusySwap ? (ex.busyGymSwap.videoQuery || ex.busyGymSwap.name) :
-                       isStiffSwap ? (ex.stiffAnkleSwap.videoQuery || ex.stiffAnkleSwap.name) :
-                       (ex.videoQuery || ex.name);
-
-    const steps = ex.postureSteps;
-    const muscleTags = ex.muscleTags;
+    const safeDisplayName = displayName.replace(/'/g, "\\'");
+    const safeTripodCue = ((cues && cues.tripodFoot) ? cues.tripodFoot : "").replace(/'/g, "\\'");
 
     html += `
       <div class="exercise-card" id="card-${ex.id}">
         <div class="exercise-card-header">
           <div class="exercise-title-group">
             <div class="exercise-name">${displayName}</div>
-            <div class="exercise-muscles">${ex.targetMuscles}</div>
+            <div class="exercise-muscles">${activeEx.targetMuscles}</div>
             
             <div class="exercise-badges" style="margin-top:6px">
-              <span class="tag tag-cyan">${phaseInfo.sets} Sets</span>
-              <span class="tag tag-emerald">${phaseInfo.reps}</span>
-              <span class="tag tag-amber">Start: ${phaseInfo.weightKg}</span>
-              <span class="tag tag-violet">Tempo: ${phaseInfo.tempo}</span>
+              <span class="tag tag-cyan">${activeEx.sets} Sets</span>
+              <span class="tag tag-emerald">${activeEx.reps}</span>
+              <span class="tag tag-amber">Start: ${activeEx.weightKg}</span>
+              <span class="tag tag-violet">Tempo: ${activeEx.tempo}</span>
             </div>
           </div>
         </div>
@@ -810,7 +860,7 @@ function renderWorkoutTab() {
             <span>Watch Form Video (15s Shorts)</span>
           </a>
           <button class="swap-btn" style="color:var(--accent-sky)" 
-            onclick="openVideoModal('${encodeURIComponent(videoQuery)}', '${displayName.replace(/'/g, "\\'")}', '${ex.cues.tripodFoot.replace(/'/g, "\\'")}')">
+            onclick="openVideoModal('${encodeURIComponent(videoQuery)}', '${safeDisplayName}', '${safeTripodCue}')">
             Quick Form Checklist
           </button>
         </div>
@@ -825,10 +875,10 @@ function renderWorkoutTab() {
         ` : ""}
 
         <!-- Realistic Demo Photo -->
-        ${ex.image ? `
+        ${activeImage ? `
           <div class="demo-photo-container">
             <div class="demo-photo-badge">📷 Form Demo Photo</div>
-            <img src="${ex.image}" alt="${displayName}" class="demo-photo-img" loading="lazy" 
+            <img src="${activeImage}" alt="${displayName}" class="demo-photo-img" loading="lazy" 
                  onerror="this.parentElement.style.display='none'">
           </div>
         ` : ""}
@@ -844,22 +894,22 @@ function renderWorkoutTab() {
               <div class="step-card-item">
                 <div class="step-number-badge step-1-badge">1</div>
                 <div>
-                  <div class="step-text-title">${steps.step1.title}</div>
-                  <div class="step-text-desc">${steps.step1.desc}</div>
+                  <div class="step-text-title">${steps.step1 ? steps.step1.title : 'Step 1: Setup'}</div>
+                  <div class="step-text-desc">${steps.step1 ? steps.step1.desc : ''}</div>
                 </div>
               </div>
               <div class="step-card-item">
                 <div class="step-number-badge step-2-badge">2</div>
                 <div>
-                  <div class="step-text-title">${steps.step2.title}</div>
-                  <div class="step-text-desc">${steps.step2.desc}</div>
+                  <div class="step-text-title">${steps.step2 ? steps.step2.title : 'Step 2: Execution'}</div>
+                  <div class="step-text-desc">${steps.step2 ? steps.step2.desc : ''}</div>
                 </div>
               </div>
               <div class="step-card-item">
                 <div class="step-number-badge step-3-badge">3</div>
                 <div>
-                  <div class="step-text-title">${steps.step3.title}</div>
-                  <div class="step-text-desc">${steps.step3.desc}</div>
+                  <div class="step-text-title">${steps.step3 ? steps.step3.title : 'Step 3: Control'}</div>
+                  <div class="step-text-desc">${steps.step3 ? steps.step3.desc : ''}</div>
                 </div>
               </div>
             </div>
@@ -867,41 +917,35 @@ function renderWorkoutTab() {
         ` : ""}
 
         <!-- Collapsible Step-by-Step Cues -->
-        <div class="cues-accordion">
-          <div class="cues-header" onclick="toggleCues('${ex.id}')">
-            <span>📖 Detailed Execution & Orthopedic Tripod Cues</span>
-            <span id="cue-icon-${ex.id}">▼</span>
+        ${cues ? `
+          <div class="cues-accordion">
+            <div class="cues-header" onclick="toggleCues('${ex.id}')">
+              <span>📖 Detailed Execution & Orthopedic Tripod Cues</span>
+              <span id="cue-icon-${ex.id}">▼</span>
+            </div>
+            <div class="cues-body" id="cues-${ex.id}">
+              ${cues.setup ? `<div class="cue-point"><span class="cue-label">Setup:</span> ${cues.setup}</div>` : ""}
+              ${cues.tripodFoot ? `<div class="cue-point"><span class="cue-label" style="color:var(--accent-emerald)">Left Ankle Tripod Cue:</span> ${cues.tripodFoot}</div>` : ""}
+              ${cues.breathingTempo ? `<div class="cue-point"><span class="cue-label">Breathing & Cadence:</span> ${cues.breathingTempo}</div>` : ""}
+              ${cues.mistakes ? `<div class="cue-point"><span class="cue-label" style="color:var(--accent-rose)">Common Mistakes to Avoid:</span> ${cues.mistakes}</div>` : ""}
+              ${(isBusySwap && ex.busyGymSwap && ex.busyGymSwap.adjustCues) ? `
+                <div class="cue-point" style="margin-top:6px;color:#fde68a">
+                  <span class="cue-label" style="color:#fde68a">Busy Equipment Adjustment:</span> ${ex.busyGymSwap.adjustCues}
+                </div>
+              ` : ""}
+              ${(isStiffSwap && ex.stiffAnkleSwap && ex.stiffAnkleSwap.adjustCues) ? `
+                <div class="cue-point" style="margin-top:6px;color:#a7f3d0">
+                  <span class="cue-label" style="color:#a7f3d0">Ankle Stiff Adjustment:</span> ${ex.stiffAnkleSwap.adjustCues}
+                </div>
+              ` : ""}
+            </div>
           </div>
-          <div class="cues-body" id="cues-${ex.id}">
-            <div class="cue-point">
-              <span class="cue-label">Setup:</span> ${ex.cues.setup}
-            </div>
-            <div class="cue-point">
-              <span class="cue-label" style="color:var(--accent-emerald)">Left Ankle Tripod Cue:</span> ${ex.cues.tripodFoot}
-            </div>
-            <div class="cue-point">
-              <span class="cue-label">Breathing & Cadence:</span> ${ex.cues.breathingTempo}
-            </div>
-            <div class="cue-point">
-              <span class="cue-label" style="color:var(--accent-rose)">Common Mistakes to Avoid:</span> ${ex.cues.mistakes}
-            </div>
-            ${isBusySwap ? `
-              <div class="cue-point" style="margin-top:6px;color:#fde68a">
-                <span class="cue-label" style="color:#fde68a">Busy Equipment Adjustment:</span> ${ex.busyGymSwap.adjustCues}
-              </div>
-            ` : ""}
-            ${isStiffSwap ? `
-              <div class="cue-point" style="margin-top:6px;color:#a7f3d0">
-                <span class="cue-label" style="color:#a7f3d0">Ankle Stiff Adjustment:</span> ${ex.stiffAnkleSwap.adjustCues}
-              </div>
-            ` : ""}
-          </div>
-        </div>
+        ` : ""}
 
         <!-- Interactive Sets Table -->
         <div class="weight-instruction-banner">
           <span class="weight-instruction-badge">💡 Target Load:</span>
-          <span class="weight-instruction-text">${phaseInfo.weightKg}</span>
+          <span class="weight-instruction-text">${activeEx.weightKg}</span>
         </div>
 
         <div class="sets-table-wrapper">
@@ -913,13 +957,13 @@ function renderWorkoutTab() {
           </div>
     `;
 
-    for (let s = 0; s < phaseInfo.sets; s++) {
-      const setKey = `${today}_${ex.id}_${s}`;
+    for (let s = 0; s < activeEx.sets; s++) {
+      const setKey = currentSwap === "original" ? `${today}_${ex.id}_${s}` : `${today}_${ex.id}_${currentSwap}_${s}`;
       const isCompleted = !!appState.completedSets[setKey];
       const savedData = appState.actualSetData[setKey] || {};
       
       // Clean numeric weight extraction (e.g. extracts "14" from "14 kg each hand...")
-      const cleanTargetMatch = String(phaseInfo.weightKg || "").match(/([0-9]+(?:\.[0-9]+)?)/);
+      const cleanTargetMatch = String(activeEx.weightKg || "").match(/([0-9]+(?:\.[0-9]+)?)/);
       const defaultWeight = cleanTargetMatch ? cleanTargetMatch[1] : "";
       
       // Auto-sanitize corrupted string concatenations (e.g. 141414810) from previous bug
@@ -930,25 +974,29 @@ function renderWorkoutTab() {
         currentWeightVal = defaultWeight;
       }
 
+      // Clean numeric reps target/placeholder (e.g. extracts "10–12" from "10–12 reps" or "10/12" from supersets)
+      const cleanRepsMatch = String(activeEx.reps || "").match(/([0-9]+(?:[-–][0-9]+)?)/);
+      const repsPlaceholder = cleanRepsMatch ? `${cleanRepsMatch[1]} reps` : "reps";
+
       html += `
         <div class="set-row ${isCompleted ? "done" : ""}" id="set-row-${ex.id}-${s}">
           <div class="set-index">${s + 1}</div>
           <div class="set-input-group">
             <input type="number" step="0.5" class="set-input" placeholder="${defaultWeight || 'kg'}" 
               value="${currentWeightVal}" 
-              oninput="handleSetDataChange('${ex.id}', ${s}, 'weight', this.value)">
+              oninput="handleSetDataChange('${ex.id}', ${s}, 'weight', this.value, '${currentSwap}')">
             <span class="set-unit">kg</span>
           </div>
           <div class="set-input-group">
-            <input type="number" class="set-input" placeholder="${phaseInfo.reps}" 
+            <input type="text" inputmode="numeric" class="set-input" placeholder="${repsPlaceholder}" 
               value="${savedData.reps || ""}" 
-              oninput="handleSetDataChange('${ex.id}', ${s}, 'reps', this.value)">
+              oninput="handleSetDataChange('${ex.id}', ${s}, 'reps', this.value, '${currentSwap}')">
             <span class="set-unit">reps</span>
           </div>
           <div>
             <button class="set-check-btn ${isCompleted ? "checked" : ""}" 
               id="check-btn-${ex.id}-${s}" 
-              onclick="toggleSetComplete('${ex.id}', ${s}, ${phaseInfo.restSec})">
+              onclick="toggleSetComplete('${ex.id}', ${s}, ${activeEx.restSec || 75}, '${currentSwap}')">
               ${isCompleted ? "✓" : ""}
             </button>
           </div>
@@ -972,6 +1020,8 @@ function renderWorkoutTab() {
       </div>
     `;
   });
+
+  
 
   container.innerHTML = html;
 }
@@ -1195,7 +1245,7 @@ function renderProgressTab() {
     <!-- Weight Journey Card -->
     <div class="weight-journey-card">
       <div style="display:flex;justify-content:space-between;align-items:center">
-        <span style="font-size:1.05rem;font-weight:800;color:#fff">📉 93 kg ➔ 75 kg Transformation Journey</span>
+        <span style="font-size:1.05rem;font-weight:800;color:#fff">📉 93 kg → 75 kg Transformation Journey</span>
         <span class="tag tag-emerald">${totalKgLost >= 0 ? `-${totalKgLost} kg Lost` : `+${Math.abs(totalKgLost)} kg`}</span>
       </div>
       
