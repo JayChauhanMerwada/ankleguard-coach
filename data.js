@@ -399,9 +399,9 @@ const WORKOUT_SPLIT = {
           step3: { title: "Step 3: Glute Lockout & Chin Tuck", desc: "Lock hips into full 180° extension. Tuck chin forward looking at knees. Hold 1s. Lower smoothly in 3s." }
         },
         phaseData: {
-          m1: { sets: 3, reps: "10–12 reps", weightKg: "40 kg", tempo: "3-1-2-1", restSec: 90 },
-          m2: { sets: 4, reps: "6–8 reps", weightKg: "60 kg", tempo: "3-1-2-1", restSec: 90 },
-          m3: { sets: 4, reps: "6–8 reps (Heavy Peak Hold)", weightKg: "75 kg", tempo: "2-0-1-2", restSec: 90 }
+          m1: { sets: 3, reps: "10–12 reps", weightKg: "20–25 kg (Light 20 kg Bar or Machine)", tempo: "3-1-2-1", restSec: 75 },
+          m2: { sets: 4, reps: "8–10 reps", weightKg: "35–40 kg", tempo: "3-1-2-1", restSec: 90 },
+          m3: { sets: 4, reps: "6–8 reps (Glute Peak Hold)", weightKg: "50–55 kg", tempo: "2-0-1-2", restSec: 90 }
         },
         cues: {
           setup: "Position upper back (scapulae) against edge of bench. Place padded barbell or machine arm across hip crease.",
@@ -456,9 +456,9 @@ const WORKOUT_SPLIT = {
           step3: { title: "Step 3: Smooth Knee Extension", desc: "Exhale and extend knees to full lockout. Squeeze quads for 1 full second. Lower under strict 3-second eccentric." }
         },
         phaseData: {
-          m1: { sets: 3, reps: "12–15 reps", weightKg: "35 kg", tempo: "3-1-1-1", restSec: 75 },
-          m2: { sets: 4, reps: "8–10 reps", weightKg: "45 kg", tempo: "3-1-1-1", restSec: 75 },
-          m3: { sets: 4, reps: "8–10 reps + 2s isometric hold", weightKg: "52.5 kg", tempo: "3-2-1-0", restSec: 75 }
+          m1: { sets: 3, reps: "12–15 reps", weightKg: "20–25 kg (Light Quad Isolation)", tempo: "3-1-1-1", restSec: 60 },
+          m2: { sets: 4, reps: "10–12 reps", weightKg: "30–35 kg", tempo: "3-1-1-1", restSec: 75 },
+          m3: { sets: 4, reps: "8–10 reps + 2s isometric hold", weightKg: "40–45 kg", tempo: "3-2-1-0", restSec: 75 }
         },
         cues: {
           setup: "Adjust machine back pad so knee joints align directly with machine pivot axis. Shin pad should sit on lower shins (above ankle joint, never on foot).",
@@ -513,9 +513,9 @@ const WORKOUT_SPLIT = {
           step3: { title: "Step 3: Heel & Big-Toe Drive", desc: "Press sled away driving through heels and 1st Metatarsal big-toe mounds. Never lock knees at top." }
         },
         phaseData: {
-          m1: { sets: 3, reps: "10–12 reps", weightKg: "80 kg", tempo: "3-1-1-0", restSec: 90 },
-          m2: { sets: 4, reps: "6–8 reps", weightKg: "110 kg", tempo: "3-1-1-0", restSec: 90 },
-          m3: { sets: 4, reps: "6–8 reps", weightKg: "130 kg", tempo: "2-0-1-0", restSec: 90 }
+          m1: { sets: 3, reps: "10–12 reps", weightKg: "Empty Sled (25–35 kg) or Light 40 kg (Zero-Strain Warmup)", tempo: "3-1-1-0", restSec: 75 },
+          m2: { sets: 4, reps: "8–10 reps", weightKg: "50–60 kg", tempo: "3-1-1-0", restSec: 90 },
+          m3: { sets: 4, reps: "6–8 reps", weightKg: "70–80 kg", tempo: "2-0-1-0", restSec: 90 }
         },
         cues: {
           setup: "Sit deep in sled seat. CRITICAL: Place both feet HIGH AND WIDE on the sled footplate with toes angled out 15°–20°.",
@@ -570,9 +570,9 @@ const WORKOUT_SPLIT = {
           step3: { title: "Step 3: 2s Squeeze & Resist", desc: "Hold peak abduction for 2 full seconds. Resist the weight coming inward over 2 seconds." }
         },
         phaseData: {
-          m1: { sets: 3, reps: "15 reps", weightKg: "40 kg", tempo: "2-1-2-1", restSec: 60 },
-          m2: { sets: 4, reps: "12 reps", weightKg: "50 kg", tempo: "2-1-2-1", restSec: 60 },
-          m3: { sets: 4, reps: "10–12 reps (2s squeeze)", weightKg: "57.5 kg", tempo: "2-2-1-0", restSec: 60 }
+          m1: { sets: 3, reps: "15 reps", weightKg: "25–30 kg (Smooth Hip Activation)", tempo: "2-1-2-1", restSec: 60 },
+          m2: { sets: 4, reps: "12 reps", weightKg: "35–40 kg", tempo: "2-1-2-1", restSec: 60 },
+          m3: { sets: 4, reps: "10–12 reps (2s squeeze)", weightKg: "45–50 kg", tempo: "2-2-1-0", restSec: 60 }
         },
         cues: {
           setup: "Sit tall with pads on the outside of your knees. Lean forward slightly from the hips (15°) to hit upper glute fibers.",
@@ -885,9 +885,9 @@ const WORKOUT_SPLIT = {
           step3: { title: "Step 3: Heel Pull & 3s Release", desc: "Exhale, curl heels toward seat. Squeeze hamstrings for 1 full second. Return slowly over 3 seconds." }
         },
         phaseData: {
-          m1: { sets: 3, reps: "10–12 reps", weightKg: "35 kg", tempo: "3-1-1-1", restSec: 75 },
-          m2: { sets: 4, reps: "6–8 reps", weightKg: "45 kg", tempo: "3-1-1-1", restSec: 90 },
-          m3: { sets: 4, reps: "6–8 reps + 2s peak contraction", weightKg: "50 kg", tempo: "3-2-1-0", restSec: 90 }
+          m1: { sets: 3, reps: "10–12 reps", weightKg: "20–25 kg (Light Posterior Control)", tempo: "3-1-1-1", restSec: 60 },
+          m2: { sets: 4, reps: "8–10 reps", weightKg: "30–35 kg", tempo: "3-1-1-1", restSec: 75 },
+          m3: { sets: 4, reps: "6–8 reps + 2s peak contraction", weightKg: "40–45 kg", tempo: "3-2-1-0", restSec: 75 }
         },
         cues: {
           setup: "Seated or prone. Position roller pad just below the gastrocnemius belly (above the Achilles tendon and above the titanium plate).",
@@ -965,9 +965,9 @@ const WORKOUT_SPLIT = {
           step3: { title: "Step 3: 2s Hold & Control", desc: "Hold touching point for 1–2 seconds feeling inner thighs engage. Open slowly over 2 seconds." }
         },
         phaseData: {
-          m1: { sets: 3, reps: "15 reps", weightKg: "35 kg", tempo: "2-1-2-1", restSec: 60 },
-          m2: { sets: 4, reps: "12 reps", weightKg: "45 kg", tempo: "2-1-2-1", restSec: 60 },
-          m3: { sets: 4, reps: "10–12 reps (2s hold)", weightKg: "52.5 kg", tempo: "2-2-1-0", restSec: 60 }
+          m1: { sets: 3, reps: "15 reps", weightKg: "20–25 kg (Gentle Groin/Pelvic Guard)", tempo: "2-1-2-1", restSec: 60 },
+          m2: { sets: 4, reps: "12 reps", weightKg: "30–35 kg", tempo: "2-1-2-1", restSec: 60 },
+          m3: { sets: 4, reps: "10–12 reps (2s hold)", weightKg: "40–45 kg", tempo: "2-2-1-0", restSec: 60 }
         },
         cues: {
           setup: "Sit tall with pads resting on the inside of your knees. Adjust lever to a comfortable stretch angle.",

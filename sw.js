@@ -1,5 +1,5 @@
 // Service Worker for AnkleGuard Coach - 100% Offline Gym Operation
-const CACHE_NAME = 'ankleguard-cache-v4';
+const CACHE_NAME = 'ankleguard-cache-v5';
 
 const ASSETS_TO_CACHE = [
   './',
